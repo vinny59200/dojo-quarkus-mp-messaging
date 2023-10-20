@@ -1,10 +1,16 @@
 package fr.loicmathieu.dojo.quarkus.messaging.order.enhancer;
 
-public class EnhancedOrder {
-    public int nbItem;
-    public int totalPrice;
-    public String userId;
-    public String shippingAddress;
-    public String userFirstName;
-    public String userLastName;
+public record EnhancedOrder(
+        int nbItem,
+        int totalPrice,
+        String userId,
+        String shippingAddress,
+        String userFirstName,
+        String userLastName) {
+
+    public EnhancedOrder( Order order, User user ) {
+        this( order.nbItem(),order.totalPrice(),order.userId(),order.shippingAddress(),user.firstName(),user.lastName());
+    }
 }
+
+
